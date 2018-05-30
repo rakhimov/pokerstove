@@ -5,20 +5,27 @@ language: cpp
 
 os: linux
 
-compiler:
-    - gcc
-    - clang
+compiler: gcc
+
+env:
+    secure: "GosBe2N5SaZAUoQ7f2K23veVLjcHasvZVxjBpoVQbpkR/3t0dv9Trx/NFxTtmGQBS7YUDy28Rkf01hCOb5T7XxV0iB7d5uUuUz8c3b+3Tj+BJfA6qwRRQIxG0/NmMq9dm+fcNAoZLxZ8oTo/mz4wDv9Wk3WzDM+L8PruZ25o5DbqpUEEh7Puu3qN3LEASqMCBbJU+wnF+wjKKXBsLViCQxc0cdT82eXh2HrDrpVSP6ZmRgKBFXzy6kvAPXnqR+aPWm3iVHhVdICDuH2znK+Xcndmy6bfiD7yhguINQ1q/faxFBsc6U+/hMoutp2bS1RwHIlBtMaikGdiDGLVItiqwWRRuc70YMNvXoKlB96uGc1s0+ikyLSTHjL7Q1FNWFOqJkjdDDrTR19mwVI+UbbSaUnE2oSp7VgBzq8lTvSX/NW3xspQX95812ymFOY33Z/HFY9N0gSKJUEx+xXS40/iRc/SFzKaW74wrAaD5AHy047havcwnOIySpGPVn8EkS2R/np8+ydX+rD6P0WqJSU0FTmFZI31aNdWTT5uqD0V2LwhMi1ETiApEg5bat/cKLUR1avmbVQFZRXUFQB/4rfJ2vjLFKEh0J3UDr+yXEVczL7FFgXX+lafqDNsHNz2JHltso76mKMkNYVqh2sl2kYqj/gAn01S5XYin5W1Ln2PCHg="
 
 addons:
+    coverity_scan:
+        project:
+            name: "rakhimov/pokerstove"
+        notification_email: "ol.rakhimov@gmail.com"
+        build_command_prepend: "cmake -DCMAKE_VERBOSE_MAKEFILE=ON .."
+        build_command: "make -j 2"
+        branch_pattern: "coverity-scan"
     apt:
         packages:
             - libboost-all-dev
 
 before_script:
     - mkdir build
+    - cd build
 
 script:
-    - cd build
-    - cmake -DCMAKE_VERBOSE_MAKEFILE=ON ..
-    - make -j 2
-    - make test
+    - echo "Done"
+    - cat cov-int/build-log.txt
